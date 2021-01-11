@@ -1,3 +1,11 @@
+
+import java.io.File;
+import java.util.Scanner;
+ import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +17,13 @@
  * @author tomek2
  */
 public class NewJFrame extends javax.swing.JFrame {
-    
+String [] nn = {"bb","bbb","bbbbbbbb"};
+double[] koszt_fundamentow = new double[100];
+double[] koszt_oscian = new double[100];
+double[] koszt_odachu = new double[100];
+double[] l_fundamentow = new double[100];
+double[] l_oscian = new double[100];
+double[] l_odachu = new double[100];
     int powierzchnia_dachu;
     int dlugosc_scian;
     int wysokosc_scian;
@@ -23,6 +37,7 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        odczyt();
     }
 
     /**
@@ -60,6 +75,13 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,11 +92,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Ocieplenie dachu");
+        jLabel1.setText("Ocieplenie dachu (aby zatwerdzic wartosci w polu wcisnij enter)");
 
-        jLabel2.setText("Podaj powierzchnie:");
+        jLabel2.setText("Podaj powierzchnie (w m2):");
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -83,22 +104,29 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Typ ocieplenia");
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jComboBox1ComponentAdded(evt);
+            }
+        });
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
-        jLabel4.setText("Ocieplenie ścian");
+        jLabel4.setText("Ocieplenie ścian (aby zatwerdzic wartosci w polu wcisnij enter)");
 
         jLabel5.setText("Podaj dlugosc:");
 
         jLabel6.setText("Podaj wysokośc:");
 
-        jTextField3.setText("jTextField3");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -107,22 +135,18 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Typ Ocieplenia:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel8.setText("Ocieplenie fundamentow");
+        jLabel8.setText("Ocieplenie fundamentow (aby zatwerdzic wartosci w polu wcisnij enter)");
 
         jLabel9.setText("Podaj długość:");
 
         jLabel10.setText("Podaj głębokość:");
 
-        jTextField4.setText("jTextField4");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("jTextField5");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -130,8 +154,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jLabel11.setText("Typ ocieplenia:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel12.setText("Koszt ocieplenia dachu:");
 
@@ -145,6 +167,20 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel17.setText("jLabel17");
 
+        jLabel18.setText("Wspolczynnik przenikania ciepla:");
+
+        jLabel19.setText("Dach:");
+
+        jLabel20.setText("jLabel20");
+
+        jLabel21.setText("Sciany:");
+
+        jLabel22.setText("jLabel22");
+
+        jLabel23.setText("Fundamenty:");
+
+        jLabel24.setText("jLabel24");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,49 +188,64 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel22)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel23)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel24))
+                    .addComponent(jLabel18)
                     .addComponent(jButton1)
                     .addComponent(jLabel4)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(jTextField1)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addComponent(jLabel9)
+                                .addGap(102, 102, 102)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(104, 104, 104)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(21, 21, 21)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                    .addComponent(jTextField5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -205,9 +256,9 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel17)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +281,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -249,7 +300,17 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("O");
@@ -259,11 +320,19 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-System.out.println("sczszc");        // TODO add your handling code here:
-jLabel13.setText(powierzchnia_dachu + "zł");
-jLabel15.setText(dlugosc_scian * wysokosc_scian + "zł");
-jLabel17.setText(dlugosc_fundamentow * glembokosc + "zł");
-
+       // TODO add your handling code here:
+jLabel13.setText(powierzchnia_dachu * koszt_odachu[jComboBox1.getSelectedIndex()] + "zł");
+jLabel15.setText(dlugosc_scian * wysokosc_scian * koszt_oscian[jComboBox2.getSelectedIndex()] + "zł");
+jLabel17.setText(dlugosc_fundamentow * glembokosc * koszt_fundamentow[jComboBox3.getSelectedIndex()] + "zł");
+System.out.println(l_oscian[jComboBox2.getSelectedIndex()]);
+// obiekty strata ciepla
+strata_ciepla dach = new strata_ciepla(powierzchnia_dachu,l_odachu[jComboBox1.getSelectedIndex()]);
+strata_ciepla scian = new strata_ciepla(dlugosc_scian * wysokosc_scian,l_oscian[jComboBox2.getSelectedIndex()]);
+strata_ciepla fundamentow = new strata_ciepla(dlugosc_fundamentow * glembokosc,l_fundamentow[jComboBox3.getSelectedIndex()]);
+jLabel20.setText(dach.strata() + " kWh.");
+jLabel22.setText(scian.strata() + " kWh.");
+jLabel24.setText(fundamentow.strata() + " kWh.");
+//button oblicz
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -290,6 +359,15 @@ jLabel17.setText(dlugosc_fundamentow * glembokosc + "zł");
         // TODO add your handling code here:
     glembokosc =Integer.parseInt(jTextField5.getText());
     }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jComboBox1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ComponentAdded
 
     /**
      * @param args the command line arguments
@@ -326,6 +404,62 @@ jLabel17.setText(dlugosc_fundamentow * glembokosc + "zł");
         });
     }
 
+    private void odczyt()
+    {
+        File plik = new File("ocieplenie_dachu.txt");
+        Scanner in = null;
+    try {
+        in = new Scanner(plik);
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }   int i = 0;
+         while (in.hasNextLine()){
+         String zdanie = in.nextLine();
+         jComboBox1.addItem(zdanie);
+         zdanie = in.nextLine();
+         koszt_odachu[i] = Double.parseDouble(zdanie);
+         zdanie = in.nextLine();
+         l_odachu[i] = Double.parseDouble(zdanie);
+         i++;
+         }
+         //////////////////////////
+         plik = new File("ocieplenie_scian.txt");
+         in = null;
+    try {
+        in = new Scanner(plik);
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }    i = 0;
+         while (in.hasNextLine()){
+         String zdanie = in.nextLine();
+         jComboBox2.addItem(zdanie);
+         zdanie = in.nextLine();
+         koszt_oscian[i] = Double.parseDouble(zdanie);
+         zdanie = in.nextLine();
+         l_oscian[i] = Double.parseDouble(zdanie);
+         i++;
+         }
+         //////////////////////////
+         plik = new File("ocieplenie_fundamentow.txt");
+         in = null;
+    try {
+        in = new Scanner(plik);
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }
+         i = 0;
+         while (in.hasNextLine()){
+         String zdanie = in.nextLine();
+         jComboBox3.addItem(zdanie);
+         zdanie = in.nextLine();
+         koszt_fundamentow[i] = Double.parseDouble(zdanie);
+         zdanie = in.nextLine();
+         l_fundamentow[i] = Double.parseDouble(zdanie);
+         i++;
+         }
+         
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -340,7 +474,14 @@ jLabel17.setText(dlugosc_fundamentow * glembokosc + "zł");
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
