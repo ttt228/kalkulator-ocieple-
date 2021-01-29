@@ -1,9 +1,19 @@
 
+import java.awt.AWTException;
+import java.awt.List;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
  import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 
 /*
@@ -17,7 +27,10 @@ import java.util.logging.Logger;
  * @author tomek2
  */
 public class NewJFrame extends javax.swing.JFrame {
-String [] nn = {"bb","bbb","bbbbbbbb"};
+String [] nazwy_o_dachu = new String[100];
+String [] nazwy_o_scian = new String[100];
+String [] nazwy_o_fundamentow = new String[100];
+
 double[] koszt_fundamentow = new double[100];
 double[] koszt_oscian = new double[100];
 double[] koszt_odachu = new double[100];
@@ -29,6 +42,13 @@ double[] l_odachu = new double[100];
     int wysokosc_scian;
     int dlugosc_fundamentow;
     int glembokosc;
+    int nr_zrzoto_ekranu = 0;
+    
+    int ilosc_o_dachu = 0;
+    int ilosc_o_scian = 0;
+    int ilosc_o_fundammentow = 0;
+    
+    double kowta_uzytkownika = 0;
 
     
     
@@ -82,9 +102,24 @@ double[] l_odachu = new double[100];
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 255));
         jButton1.setText("Oblicz");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +216,64 @@ double[] l_odachu = new double[100];
 
         jLabel24.setText("jLabel24");
 
+        jLabel25.setText("Podaj kwote jaka dysponujesz:");
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField6KeyPressed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 153, 255));
+        jButton2.setText("Podaj sugerowane ocieplenie");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Dach:");
+
+        jLabel27.setText("Sciany:");
+
+        jLabel28.setText("Fundamenty:");
+
+        jLabel29.setText("Koszt:");
+
+        jLabel30.setText("jLabel30");
+
+        jLabel31.setText("jLabel31");
+
+        jLabel32.setText("jLabel32");
+
+        jLabel33.setText("jLabel33");
+
+        jLabel34.setText("jLabel34");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jButton3.setBackground(new java.awt.Color(51, 153, 255));
+        jButton3.setLabel("Wykonaj zrzot ekranu");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,107 +282,144 @@ double[] l_odachu = new double[100];
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel21)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel22)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel23)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel24))
-                    .addComponent(jLabel18)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(102, 102, 102)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(104, 104, 104)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(21, 21, 21)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                                    .addComponent(jTextField5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel5))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                            .addComponent(jTextField1)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(102, 102, 102)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8))
+                                .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel3)
+                                        .addGap(104, 104, 104)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel34))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addGap(21, 21, 21)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                            .addComponent(jTextField5))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel25)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel19)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel20)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel21)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel22)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jLabel23)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel24))
+                                    .addComponent(jLabel18)
+                                    .addComponent(jButton1)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jLabel15)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel16)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel17)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(jButton3))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel27)
+                                            .addComponent(jLabel28)
+                                            .addComponent(jLabel29))
+                                        .addGap(39, 39, 39)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel33)
+                                            .addComponent(jLabel32)
+                                            .addComponent(jLabel31)
+                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 118, Short.MAX_VALUE)))
+                        .addGap(91, 91, 91))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel17)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
@@ -299,7 +429,8 @@ double[] l_odachu = new double[100];
                     .addComponent(jLabel14)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17))
+                    .addComponent(jLabel17)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -310,7 +441,28 @@ double[] l_odachu = new double[100];
                     .addComponent(jLabel22)
                     .addComponent(jLabel23)
                     .addComponent(jLabel24))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel33))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("O");
@@ -332,7 +484,7 @@ strata_ciepla fundamentow = new strata_ciepla(dlugosc_fundamentow * glembokosc,l
 jLabel20.setText(dach.strata() + " kWh.");
 jLabel22.setText(scian.strata() + " kWh.");
 jLabel24.setText(fundamentow.strata() + " kWh.");
-//button oblicz
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -369,6 +521,27 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ComponentAdded
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+        kowta_uzytkownika = Integer.parseInt(jTextField6.getText());
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextField6KeyPressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        najlepszeocieplenie(kowta_uzytkownika);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        nr_zrzoto_ekranu++;
+        zrzot(nr_zrzoto_ekranu);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -396,7 +569,6 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
@@ -412,15 +584,16 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
         in = new Scanner(plik);
     } catch (FileNotFoundException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }   int i = 0;
+    }   
          while (in.hasNextLine()){
          String zdanie = in.nextLine();
          jComboBox1.addItem(zdanie);
+         nazwy_o_dachu[ilosc_o_dachu] = zdanie;
          zdanie = in.nextLine();
-         koszt_odachu[i] = Double.parseDouble(zdanie);
+         koszt_odachu[ilosc_o_dachu] = Double.parseDouble(zdanie);
          zdanie = in.nextLine();
-         l_odachu[i] = Double.parseDouble(zdanie);
-         i++;
+         l_odachu[ilosc_o_dachu] = Double.parseDouble(zdanie);
+         ilosc_o_dachu++;
          }
          //////////////////////////
          plik = new File("ocieplenie_scian.txt");
@@ -429,15 +602,16 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
         in = new Scanner(plik);
     } catch (FileNotFoundException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }    i = 0;
+    }    
          while (in.hasNextLine()){
          String zdanie = in.nextLine();
          jComboBox2.addItem(zdanie);
+         nazwy_o_scian[ilosc_o_scian] = zdanie;
          zdanie = in.nextLine();
-         koszt_oscian[i] = Double.parseDouble(zdanie);
+         koszt_oscian[ilosc_o_scian] = Double.parseDouble(zdanie);
          zdanie = in.nextLine();
-         l_oscian[i] = Double.parseDouble(zdanie);
-         i++;
+         l_oscian[ilosc_o_scian] = Double.parseDouble(zdanie);
+         ilosc_o_scian++;
          }
          //////////////////////////
          plik = new File("ocieplenie_fundamentow.txt");
@@ -447,21 +621,277 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
     } catch (FileNotFoundException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
     }
-         i = 0;
          while (in.hasNextLine()){
          String zdanie = in.nextLine();
          jComboBox3.addItem(zdanie);
+         nazwy_o_fundamentow[ilosc_o_fundammentow] = zdanie;
          zdanie = in.nextLine();
-         koszt_fundamentow[i] = Double.parseDouble(zdanie);
+         koszt_fundamentow[ilosc_o_fundammentow] = Double.parseDouble(zdanie);
          zdanie = in.nextLine();
-         l_fundamentow[i] = Double.parseDouble(zdanie);
-         i++;
+         l_fundamentow[ilosc_o_fundammentow] = Double.parseDouble(zdanie);
+         ilosc_o_fundammentow++;
+         }
+    }
+         
+         private void najlepszeocieplenie(double fundusze){
+         int nr_o_dachu = 1000;
+         int nr_o_scian = 1000;
+         int nr_o_fundamentow = 1000;
+         double lonczne_przewodnictwo = 400000;
+         int liczbarozwiazan = 0;
+         int indeks_rozwiazania = -1;
+         ArrayList<rozwiazanienr> listarozwiazan =new ArrayList<rozwiazanienr>();
+         rozwiazanienr [] tabrozwiazan = new rozwiazanienr[100];
+
+ 
+         
+         
+         double naj_lonczne_przewodnictwo = 400000000;
+         
+         for(int i=0;i<ilosc_o_dachu;i++){
+             
+             double aktualny_koszt = 0;
+             lonczne_przewodnictwo = 40000000;
+             int nr_o_dachu_t = 40000000;
+             int nr_o_scian_t = 40000000;
+             int nr_o_fundamentow_t = 40000000;
+
+             for(int j=0;j<ilosc_o_scian;j++){
+
+             for(int n=0;n<ilosc_o_fundammentow;n++){
+             lonczne_przewodnictwo = powierzchnia_dachu*l_odachu[i];
+             aktualny_koszt = koszt_odachu[i] * powierzchnia_dachu;
+             nr_o_dachu_t=i;
+                 
+             aktualny_koszt = aktualny_koszt + dlugosc_scian * wysokosc_scian * koszt_oscian[j];
+             lonczne_przewodnictwo = lonczne_przewodnictwo + dlugosc_scian * wysokosc_scian*l_oscian[j];
+             nr_o_scian_t=j;
+             
+             aktualny_koszt = aktualny_koszt + dlugosc_fundamentow * glembokosc * koszt_fundamentow[n];
+             lonczne_przewodnictwo = lonczne_przewodnictwo + dlugosc_fundamentow * glembokosc * l_fundamentow[n];
+                nr_o_fundamentow_t=n;
+                listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,nr_o_scian_t,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+                liczbarozwiazan++;
+             //trzeci for {
+             }
+             //drugi for {
+             }
+         //pierwszy for {
          }
          
-    }
+         for(int i=0;i<listarozwiazan.size();i++){
+
+         if(listarozwiazan.get(i).koszttt()<fundusze){ 
+             if(listarozwiazan.get(i).lonczneprzewodnictwo() < naj_lonczne_przewodnictwo){
+             naj_lonczne_przewodnictwo = listarozwiazan.get(i).lonczneprzewodnictwo();
+             indeks_rozwiazania = i;
+             }
+         }
+         
+         }// koncze sprawdzac pary w ktorych uwzglendinam wszystkie 3 rodzaje ocieplen
+         
+         
+         if(indeks_rozwiazania == -1){//zczynam sprawdzanie tylko dla 2 ridzajow ocieplen
+          for(int i=0;i<ilosc_o_dachu;i++){
+             
+             double aktualny_koszt = 0;
+             lonczne_przewodnictwo = 40000000;
+             int nr_o_dachu_t = 40000000;
+             int nr_o_scian_t = 40000000;
+             int nr_o_fundamentow_t = 40000000;
+
+             for(int j=0;j<ilosc_o_scian;j++){
+
+             for(int n=0;n<ilosc_o_fundammentow;n++){
+
+                 
+             aktualny_koszt = dlugosc_scian * wysokosc_scian * koszt_oscian[j];
+             lonczne_przewodnictwo = dlugosc_scian * wysokosc_scian*l_oscian[j];
+             nr_o_scian_t=j;
+             
+             aktualny_koszt = aktualny_koszt + dlugosc_fundamentow * glembokosc * koszt_fundamentow[n];
+             lonczne_przewodnictwo = lonczne_przewodnictwo + dlugosc_fundamentow * glembokosc * l_fundamentow[n];
+                nr_o_fundamentow_t=n;
+                listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,nr_o_scian_t,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+                liczbarozwiazan++;
+             //trzeci for {
+             }
+             //drugi for {
+             }
+         //pierwszy for {
+         }//bez dachu
+    
+          
+          
+          
+                   for(int i=0;i<ilosc_o_dachu;i++){
+             
+             double aktualny_koszt = 0;
+             lonczne_przewodnictwo = 40000000;
+             int nr_o_dachu_t = 40000000;
+             int nr_o_scian_t = 40000000;
+             int nr_o_fundamentow_t = 40000000;
+
+             for(int j=0;j<ilosc_o_scian;j++){
+
+             for(int n=0;n<ilosc_o_fundammentow;n++){
+             lonczne_przewodnictwo = powierzchnia_dachu*l_odachu[i];
+             aktualny_koszt = koszt_odachu[i] * powierzchnia_dachu;
+             nr_o_dachu_t=i;
+            
+             
+             aktualny_koszt = aktualny_koszt + dlugosc_fundamentow * glembokosc * koszt_fundamentow[n];
+             lonczne_przewodnictwo = lonczne_przewodnictwo + dlugosc_fundamentow * glembokosc * l_fundamentow[n];
+                nr_o_fundamentow_t=n;
+                listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,nr_o_scian_t,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+                liczbarozwiazan++;
+             //trzeci for {
+             }
+             //drugi for {
+             }
+         //pierwszy for {
+         }//bez scian
+                   
+                   
+                   
+                            for(int i=0;i<ilosc_o_dachu;i++){
+             
+             double aktualny_koszt = 0;
+             lonczne_przewodnictwo = 40000000;
+             int nr_o_dachu_t = 40000000;
+             int nr_o_scian_t = 40000000;
+             int nr_o_fundamentow_t = 40000000;
+
+             for(int j=0;j<ilosc_o_scian;j++){
+
+             for(int n=0;n<ilosc_o_fundammentow;n++){
+             lonczne_przewodnictwo = powierzchnia_dachu*l_odachu[i];
+             aktualny_koszt = koszt_odachu[i] * powierzchnia_dachu;
+             nr_o_dachu_t=i;
+                 
+             aktualny_koszt = aktualny_koszt + dlugosc_scian * wysokosc_scian * koszt_oscian[j];
+             lonczne_przewodnictwo = lonczne_przewodnictwo + dlugosc_scian * wysokosc_scian*l_oscian[j];
+             nr_o_scian_t=j;
+
+                listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,nr_o_scian_t,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+                liczbarozwiazan++;
+             //trzeci for {
+             }
+             //drugi for {
+             }
+         //pierwszy for {
+         }//bez fundamentow
+                       for(int i=0;i<listarozwiazan.size();i++){
+                           
+         if(listarozwiazan.get(i).koszttt()<fundusze){ 
+             if(listarozwiazan.get(i).lonczneprzewodnictwo() < naj_lonczne_przewodnictwo){
+             naj_lonczne_przewodnictwo = listarozwiazan.get(i).lonczneprzewodnictwo();
+             indeks_rozwiazania = i;
+             }
+         }
+         
+         }// koncze sprawdzac pary w ktorych uwzglendinam wszystkie 2 rodzaje ocieplen
+         }// koniec if dla 2 ocieplen
+         
+         
+         
+            if(indeks_rozwiazania == -1){//zczynam sprawdzanie tylko dla 1 ridzajow ocieplen
+                
+             
+             
+             double aktualny_koszt = 0;
+             lonczne_przewodnictwo = 40000000;
+             int nr_o_dachu_t = 40000000;
+             int nr_o_scian_t = 40000000;
+             int nr_o_fundamentow_t = 40000000;
+             
+             for(int i=0;i<ilosc_o_dachu;i++){
+             lonczne_przewodnictwo = powierzchnia_dachu*l_odachu[i];
+             aktualny_koszt = koszt_odachu[i] * powierzchnia_dachu;
+             listarozwiazan.add(new rozwiazanienr(i,nr_o_scian_t,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+             }
+
+             for(int j=0;j<ilosc_o_scian;j++){
+             aktualny_koszt = dlugosc_scian * wysokosc_scian * koszt_oscian[j];
+             lonczne_przewodnictwo = dlugosc_scian * wysokosc_scian*l_oscian[j];
+             listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,j,nr_o_fundamentow_t,lonczne_przewodnictwo,aktualny_koszt));
+             }
+
+             for(int n=0;n<ilosc_o_fundammentow;n++){
+              aktualny_koszt = dlugosc_fundamentow * glembokosc * koszt_fundamentow[n];
+              lonczne_przewodnictwo = dlugosc_fundamentow * glembokosc * l_fundamentow[n];
+              listarozwiazan.add(new rozwiazanienr(nr_o_dachu_t,nr_o_scian_t,n,lonczne_przewodnictwo,aktualny_koszt));
+             }
+
+                
+                
+             for(int i=0;i<listarozwiazan.size();i++){
+                           
+         if(listarozwiazan.get(i).koszttt()<fundusze){ 
+             if(listarozwiazan.get(i).lonczneprzewodnictwo() < naj_lonczne_przewodnictwo){
+             naj_lonczne_przewodnictwo = listarozwiazan.get(i).lonczneprzewodnictwo();
+             indeks_rozwiazania = i;
+             }
+         }
+         
+         }// koncze sprawdzac pary w ktorych uwzglendinam wszystkie 1 rodzaje ocieplen  
+            }
+            if(listarozwiazan.get(indeks_rozwiazania).nr_o_dachu==40000000)
+            {
+                jLabel30.setText("brak");
+            }
+                
+                if(listarozwiazan.get(indeks_rozwiazania).nr_o_dachu<40000000){
+                 jLabel30.setText(nazwy_o_dachu[listarozwiazan.get(indeks_rozwiazania).nr_o_dachu] + " x " + powierzchnia_dachu);
+                }else jLabel30.setText("brak");
+         
+                if(listarozwiazan.get(indeks_rozwiazania).nr_o_scian<40000000){
+                 jLabel31.setText(nazwy_o_scian[listarozwiazan.get(indeks_rozwiazania).nr_o_scian] + " x " + dlugosc_scian * wysokosc_scian);
+                }else jLabel31.setText("brak");
+         
+                if(listarozwiazan.get(indeks_rozwiazania).nr_o_fundamentow<40000000){
+                 jLabel32.setText(nazwy_o_fundamentow[listarozwiazan.get(indeks_rozwiazania).nr_o_fundamentow] + " x " + dlugosc_fundamentow * glembokosc);
+                }else jLabel32.setText("brak");
+         
+                          
+                jLabel33.setText(""+listarozwiazan.get(indeks_rozwiazania).koszt + "zl");
+
+
+         System.out.println(listarozwiazan.size());
+         listarozwiazan.get(indeks_rozwiazania).wyswietl();
+         
+         
+         
+         
+         }
+         
+    private void zrzot(int n){
+         Robot robot = null;
+            try {
+                robot = new Robot();
+            } catch (AWTException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            int sze = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+            int wys = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        Rectangle bounds = new Rectangle (0,0,sze,wys);
+        BufferedImage afsfsd = robot.createScreenCapture(bounds);
+        File zrzot = new File(n+"zrzot.jpg");
+            try {
+                ImageIO.write(afsfsd, "jpg", zrzot);
+
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         
+         }
+         
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -482,17 +912,29 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

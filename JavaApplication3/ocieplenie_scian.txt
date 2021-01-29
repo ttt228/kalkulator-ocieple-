@@ -4,3 +4,6 @@ Swisspor LAMBDA 0,031 [W/mK] 33 zl
 Termo Organika 0,033 [W/mK] 25,3 zl
 25.3
 0.033
+Nowe 0,020 [W/mK] 40,1 zl
+40.1
+0.020

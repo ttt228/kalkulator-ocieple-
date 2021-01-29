@@ -22,7 +22,7 @@ public class strata_ciepla {
     
     
     public double strata() {
-        double strata = (0.024 * U * A * L) / 1000;
+        double strata = (0.24 * U * A * L) / 1000;
         System.out.println(strata);
         return strata;
     }
