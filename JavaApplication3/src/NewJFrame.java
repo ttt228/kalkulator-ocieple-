@@ -44,6 +44,9 @@ double[] l_odachu = new double[100];
     int glembokosc;
     int nr_zrzoto_ekranu = 0;
     
+    double cieplo_w = 22;
+    double cieplo_z = 0;
+    
     int ilosc_o_dachu = 0;
     int ilosc_o_scian = 0;
     int ilosc_o_fundammentow = 0;
@@ -113,9 +116,12 @@ double[] l_odachu = new double[100];
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,7 +208,7 @@ double[] l_odachu = new double[100];
 
         jLabel17.setText("jLabel17");
 
-        jLabel18.setText("Wspolczynnik przenikania ciepla:");
+        jLabel18.setText("Wspolczynnik przenikania ciepla (na godzinę):");
 
         jLabel19.setText("Dach:");
 
@@ -253,8 +259,6 @@ double[] l_odachu = new double[100];
 
         jLabel33.setText("jLabel33");
 
-        jLabel34.setText("jLabel34");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -271,6 +275,24 @@ double[] l_odachu = new double[100];
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel35.setText("Temperatura wewnątrz budynku:");
+
+        jLabel36.setText("Temperatura na zewnątrz budynku :");
+
+        jTextField7.setText("22");
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jTextField8.setText("0");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
             }
         });
 
@@ -293,19 +315,18 @@ double[] l_odachu = new double[100];
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                             .addComponent(jTextField1)))
+                                    .addComponent(jLabel8)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(102, 102, 102)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel8))
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(104, 104, 104)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel34))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -350,22 +371,7 @@ double[] l_odachu = new double[100];
                                         .addGap(40, 40, 40)
                                         .addComponent(jLabel24))
                                     .addComponent(jLabel18)
-                                    .addComponent(jButton1)
                                     .addComponent(jLabel4)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel15)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel16)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel17)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jButton3))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -377,7 +383,39 @@ double[] l_odachu = new double[100];
                                             .addComponent(jLabel33)
                                             .addComponent(jLabel32)
                                             .addComponent(jLabel31)
-                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton1)
+                                                .addGap(62, 62, 62)
+                                                .addComponent(jLabel35)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel13)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel14)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel15)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel16)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel17))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel36)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(56, 56, 56)
+                                                .addComponent(jButton3))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(27, 27, 27)
+                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(0, 118, Short.MAX_VALUE)))
                         .addGap(91, 91, 91))
                     .addGroup(layout.createSequentialGroup()
@@ -395,8 +433,7 @@ double[] l_odachu = new double[100];
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel34))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -421,7 +458,12 @@ double[] l_odachu = new double[100];
                         .addGap(68, 68, 68)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel36)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -478,12 +520,13 @@ jLabel15.setText(dlugosc_scian * wysokosc_scian * koszt_oscian[jComboBox2.getSel
 jLabel17.setText(dlugosc_fundamentow * glembokosc * koszt_fundamentow[jComboBox3.getSelectedIndex()] + "zł");
 System.out.println(l_oscian[jComboBox2.getSelectedIndex()]);
 // obiekty strata ciepla
-strata_ciepla dach = new strata_ciepla(powierzchnia_dachu,l_odachu[jComboBox1.getSelectedIndex()]);
-strata_ciepla scian = new strata_ciepla(dlugosc_scian * wysokosc_scian,l_oscian[jComboBox2.getSelectedIndex()]);
-strata_ciepla fundamentow = new strata_ciepla(dlugosc_fundamentow * glembokosc,l_fundamentow[jComboBox3.getSelectedIndex()]);
-jLabel20.setText(dach.strata() + " kWh.");
-jLabel22.setText(scian.strata() + " kWh.");
-jLabel24.setText(fundamentow.strata() + " kWh.");
+double roznica_t = cieplo_w - cieplo_z;
+strata_ciepla dach = new strata_ciepla(powierzchnia_dachu,l_odachu[jComboBox1.getSelectedIndex()],roznica_t);
+strata_ciepla scian = new strata_ciepla(dlugosc_scian * wysokosc_scian,l_oscian[jComboBox2.getSelectedIndex()],roznica_t);
+strata_ciepla fundamentow = new strata_ciepla(dlugosc_fundamentow * glembokosc,l_fundamentow[jComboBox3.getSelectedIndex()],roznica_t);
+jLabel20.setText(dach.strata() + " wat.");
+jLabel22.setText(scian.strata() + " wat.");
+jLabel24.setText(fundamentow.strata() + " wat.");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -541,6 +584,16 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
         nr_zrzoto_ekranu++;
         zrzot(nr_zrzoto_ekranu);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+        cieplo_w = Integer.parseInt(jTextField7.getText());
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+        cieplo_z = Integer.parseInt(jTextField8.getText());
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -857,8 +910,8 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
                 jLabel33.setText(""+listarozwiazan.get(indeks_rozwiazania).koszt + "zl");
 
 
-         System.out.println(listarozwiazan.size());
-         listarozwiazan.get(indeks_rozwiazania).wyswietl();
+         //System.out.println(listarozwiazan.size());
+         //listarozwiazan.get(indeks_rozwiazania).wyswietl();
          
          
          
@@ -922,7 +975,8 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -936,5 +990,7 @@ jLabel24.setText(fundamentow.strata() + " kWh.");
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }
